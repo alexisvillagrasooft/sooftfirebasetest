@@ -3,222 +3,36 @@
     <v-main class="pa-5">
       <v-expansion-panels multiple v-model="panel">
         <v-expansion-panel>
+          <v-expansion-panel-header> Importar Autos </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <FirebaseAddImport
+              :saveMultiple="this.saveMultiple"
+              :loading="this.loadingAdd"
+            />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
           <v-expansion-panel-header> Agregar Auto </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-form>
-              <v-row>
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="newCar.marca"
-                    label="Marca"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.marcas"
-                    v-model="newCar.marca"
-                    label="Marca"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="newCar.modelo"
-                    label="Modelo"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.modelos"
-                    v-model="newCar.modelo"
-                    label="Modelos"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="newCar.tipo"
-                    label="Tipo"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.tipos"
-                    v-model="newCar.tipo"
-                    label="Tipo"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="newCar.motor"
-                    label="Motor"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.motores"
-                    v-model="newCar.motor"
-                    label="Motor"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.anio"
-                    label="Año"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.color"
-                    label="Color"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.puertas"
-                    label="Puertas"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.combustible"
-                    label="Combustible"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.kilometros"
-                    label="Kilometros"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="newCar.transmision"
-                    label="Transmision"
-                    required
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <v-btn
-                    :loading="loading"
-                    :disabled="loading"
-                    color="info"
-                    @click="save"
-                  >
-                    Agregar
-                    <template v-slot:loader>
-                      <span class="custom-loader">
-                        <v-icon light>mdi-cached</v-icon>
-                      </span>
-                    </template>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-form>
-          </v-expansion-panel-content> </v-expansion-panel
-        ><v-expansion-panel ex>
+            <FirebaseAdd :saveCar="this.save" :loading="this.loadingAdd" />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel ex>
           <v-expansion-panel-header>
             Listado de Autos
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-form>
-              <v-row class="pb-5">
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="queryCars.marca"
-                    label="Marca"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.marcas"
-                    v-model="queryCars.marca"
-                    label="Marca"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="3">
-                  <!-- <v-text-field
-                    v-model="queryCars.modelo"
-                    label="Modelo"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.modelos"
-                    v-model="queryCars.modelo"
-                    label="Modelo"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="2">
-                  <!-- <v-text-field
-                    v-model="queryCars.tipo"
-                    label="Tipo"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.tipos"
-                    v-model="queryCars.tipo"
-                    label="Tipo"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="2">
-                  <!-- <v-text-field
-                    v-model="queryCars.motor"
-                    label="Motor"
-                    required
-                    dense
-                  ></v-text-field> -->
-                  <v-select
-                    :items="this.motores"
-                    v-model="queryCars.motor"
-                    label="Motor"
-                    dense
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" md="2">
-                  <v-btn
-                    :loading="loadingCars"
-                    :disabled="loadingCars"
-                    color="blue-grey"
-                    class="ma-2 white--text"
-                    @click="refresh"
-                  >
-                    <v-icon dark> mdi-refresh</v-icon>
-                  </v-btn>
-                  <v-btn
-                    :loading="loadingCars"
-                    :disabled="loadingCars"
-                    color="info"
-                    @click="searchCars"
-                  >
-                    Buscar
-                    <template v-slot:loader>
-                      <span class="custom-loader">
-                        <v-icon light>mdi-cached</v-icon>
-                      </span>
-                    </template>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-form>
-            <FirebaseTable :cars="this.cars" :loading="this.loadingCars" />
+            <FirebaseFilter
+              :refreshCars="this.refresh"
+              :searchAllCars="this.searchCars"
+              :loading="this.loadingCars"
+            />
+            <FirebaseTable
+              :cars="this.cars"
+              :loading="this.loadingCars"
+              :loadingDel="this.loadingDelete"
+              :deleteCar="this.deleteCar"
+            />
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -232,13 +46,18 @@ import {
   getFirestore,
   collection,
   addDoc,
+  writeBatch,
   getDocs,
+  deleteDoc,
   query,
   where,
+  doc,
 } from "firebase/firestore";
 import firebaseConfig from "./plugins/firebase";
 import FirebaseTable from "./components/FirebaseTable";
-import { marcas, modelos, tipos, motores } from "./plugins/arrays";
+import FirebaseFilter from "./components/FirebaseFilter.vue";
+import FirebaseAdd from "./components/FirebaseAdd.vue";
+import FirebaseAddImport from "./components/FirebaseAddImport.vue";
 const app = initializeApp(firebaseConfig); // Inicializa con la configuracion de Firebase
 const db = getFirestore(app); // Obtiene la DB
 let carsRef = collection(db, "cars"); // Obtiene la coleccion en cuestion
@@ -250,28 +69,15 @@ export default {
   },
   components: {
     FirebaseTable,
+    FirebaseFilter,
+    FirebaseAdd,
+    FirebaseAddImport,
   },
   data: () => ({
-    loading: false,
+    loadingAdd: false,
     loadingCars: false,
-    marcas: marcas,
-    modelos: modelos,
-    tipos: tipos,
-    motores: motores,
-    panel: [1],
-    newCar: {
-      marca: "Chevrolet",
-      modelo: "Corsa",
-      tipo: "Sedan",
-      motor: "1.5",
-      anio: "1994",
-      color: "Gris",
-      puertas: "5",
-      combustible: "Nafta",
-      kilometros: "105000",
-      transmision: "Manual",
-      created: new Date(),
-    },
+    loadingDelete: false,
+    panel: [2],
     queryCars: {
       marca: "",
       modelo: "",
@@ -281,24 +87,35 @@ export default {
     cars: [],
   }),
   methods: {
-    async save() {
-      this.loading = true;
-      this.newCar.created = new Date();
-      await addDoc(carsRef, this.newCar);
-      this.cars = await this.getCars();
-      this.loading = false;
+    async save(newCarsave) {
+      this.loadingAdd = true;
+      newCarsave.created = new Date();
+      await addDoc(carsRef, newCarsave);
+      await this.searchCars(this.queryCars);
+      this.loadingAdd = false;
     },
-    async searchCars() {
+    async saveMultiple(newCarsSave) {
+      this.loadingAdd = true;
+      const batch = writeBatch(db);
+      newCarsSave.forEach((car) => {
+        const newDoc = doc(carsRef);
+        batch.set(newDoc, { ...car, created: new Date() });
+      });
+      await batch.commit();
+      await this.searchCars(this.queryCars);
+      this.loadingAdd = false;
+    },
+    async searchCars(queryCarsSearch) {
       this.loadingCars = true;
-      this.cars = await this.getCars();
+      this.cars = await this.getCars(queryCarsSearch);
       this.loadingCars = false;
     },
     async refresh() {
       this.queryCars = { marca: "", modelo: "", tipo: "", motor: "" };
-      this.searchCars();
+      this.searchCars(this.queryCars);
     },
-    async getCars() {
-      const { marca, modelo, tipo, motor } = this.queryCars;
+    async getCars(queryCarsSearch) {
+      const { marca, modelo, tipo, motor } = queryCarsSearch;
       let filters = [];
 
       if (marca.length) filters.push(where("marca", "==", marca));
@@ -306,18 +123,20 @@ export default {
       if (tipo.length) filters.push(where("tipo", "==", tipo));
       if (motor.length) filters.push(where("motor", "==", motor));
 
-      // console.log(filters);
-
       const q = query(carsRef, ...filters);
       const carsDocs = await getDocs(q);
-      const cars = carsDocs.docs.map((doc) => {
-        return { ...doc.data(), created: doc.data().created.toDate() };
-      });
+      const cars = carsDocs.docs;
       return cars;
+    },
+    async deleteCar(ref) {
+      this.loadingDelete = true;
+      await deleteDoc(ref);
+      await this.searchCars(this.queryCars);
+      this.loadingDelete = false;
     },
   },
   async mounted() {
-    this.cars = await this.getCars();
+    await this.searchCars(this.queryCars);
   },
 };
 </script>

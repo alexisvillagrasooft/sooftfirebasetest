@@ -67,6 +67,7 @@ export const modelos = [
   "Fiesta",
   "Palio",
   "Montana",
+  "Ecosport",
 ];
 export const tipos = [
   "Sedan",
