@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="pa-5">
+    <v-main class="py-6 px-15">
       <v-expansion-panels multiple v-model="panel">
         <v-expansion-panel>
           <v-expansion-panel-header> Importar Autos </v-expansion-panel-header>
