@@ -16,12 +16,20 @@
         name="file"
         ref="pond"
         label-idle="Arrastra el archivo aqui..."
+        labelFileProcessingComplete="Subida completa"
+        labelFileProcessingAborted="Subida Cancelada"
+        labelInvalidField="El archivo tiene un formato no permitido"
+        labelFileProcessing="Subiendo"
+        labelTapToCancel="Toca para cancelar"
+        labelTapToRetry="Toca para reintentar"
+        labelTapToUndo="Toca para eliminar"
         v-bind:allow-multiple="true"
         v-bind:server="myServer"
         accepted-file-types="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         v-on:init="handleFilePondInit"
         v-on:processfile="handleFileProcess"
         v-on:processfiles="handleFilesProcess"
+        labelFileProcessingSuccess="Hola"
       />
     </v-col>
     <v-col cols="12" class="text-right">
