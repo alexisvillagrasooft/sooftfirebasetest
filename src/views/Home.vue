@@ -3,6 +3,9 @@
     <v-expansion-panel>
       <v-expansion-panel-header color="primary white--text">
         Importar Autos
+        <template v-slot:actions>
+          <v-icon color="white"> $expand </v-icon>
+        </template>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <FirebaseAddImport
@@ -15,6 +18,9 @@
     <v-expansion-panel>
       <v-expansion-panel-header color="primary white--text">
         Agregar Auto
+        <template v-slot:actions>
+          <v-icon color="white"> $expand </v-icon>
+        </template>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <FirebaseAdd
@@ -27,6 +33,9 @@
     <v-expansion-panel ex>
       <v-expansion-panel-header color="primary white--text">
         Listado de Autos
+        <template v-slot:actions>
+          <v-icon color="white"> $expand </v-icon>
+        </template>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <FirebaseFilter
